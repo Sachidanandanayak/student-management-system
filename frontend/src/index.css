@@ -1,0 +1,147 @@
+:root {
+  /* Vibrant Colors */
+  --bg-hue: 220;
+  --bg: hsl(var(--bg-hue), 30%, 98%);
+  --surface: hsl(0, 0%, 100%);
+  --muted: hsl(215, 16%, 47%);
+  --text: hsl(222, 47%, 11%);
+  
+  --primary-hue: 240;
+  --primary: hsl(var(--primary-hue), 80%, 60%);
+  --primary-strong: hsl(var(--primary-hue), 90%, 50%);
+  --secondary: hsl(210, 40%, 96%);
+  
+  --accent: hsl(150, 80%, 45%);
+  --danger: hsl(350, 80%, 55%);
+  --warning: hsl(40, 90%, 50%);
+  
+  /* Glass and Shadows */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --shadow-color: 220 40% 15%;
+  --shadow: 0 10px 30px -10px hsl(var(--shadow-color) / 0.1),
+            0 20px 40px -20px hsl(var(--shadow-color) / 0.15);
+  
+  --glow-primary: 0 0 20px hsl(var(--primary-hue) 80% 60% / 0.4),
+                  0 0 40px hsl(var(--primary-hue) 90% 50% / 0.2);
+  --glow-accent: 0 0 20px hsl(150 80% 45% / 0.4);
+  
+  --line: hsl(214, 32%, 91%);
+  --hero-start: hsl(250, 85%, 65%);
+  --hero-end: hsl(220, 90%, 60%);
+  
+  --radius: 20px;
+  --radius-sm: 12px;
+  
+  /* 3D Depth */
+  --z-depth-1: translateZ(10px);
+  --z-depth-2: translateZ(20px);
+  --z-depth-3: translateZ(40px);
+}
+
+body[data-theme="dark"] {
+  --bg: hsl(222, 47%, 7%);
+  --surface: hsl(222, 47%, 11%);
+  --muted: hsl(215, 20%, 65%);
+  --text: hsl(210, 40%, 98%);
+  
+  --secondary: hsl(222, 40%, 15%);
+  --line: hsl(217, 32%, 17%);
+  
+  --glass-bg: rgba(15, 23, 42, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  
+  --shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.6),
+            0 25px 50px -15px rgba(0, 0, 0, 0.8);
+            
+  --hero-start: hsl(250, 65%, 25%);
+  --hero-end: hsl(220, 70%, 20%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  background-image: 
+    radial-gradient(circle at 15% 15%, hsla(var(--primary-hue), 80%, 60%, 0.1), transparent 30%),
+    radial-gradient(circle at 85% 85%, hsla(150, 80%, 45%, 0.05), transparent 30%),
+    radial-gradient(circle at 50% 100%, hsla(280, 80%, 60%, 0.08), transparent 40%);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 32px;
+  min-height: 100vh;
+  transition: background 0.4s ease, color 0.4s ease;
+  overflow-x: hidden;
+  animation: page-enter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+a { color: var(--primary); text-decoration: none; transition: color 0.2s ease; }
+a:hover { color: var(--primary-strong); }
+
+h1, h2, h3, h4, h5, h6 { margin-top: 0; font-weight: 700; letter-spacing: -0.02em; }
+.eyebrow { text-transform: uppercase; letter-spacing: 0.12em; font-size: 11px; color: var(--primary); margin: 0 0 6px; font-weight: 700; }
+.lede { max-width: 600px; color: var(--muted); margin: 8px 0 0; font-size: 16px; }
+
+.page-intro {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 32px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.page-intro:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -15px hsl(var(--shadow-color) / 0.2);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: none;
+  background: var(--secondary);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn.primary {
+  background: linear-gradient(135deg, var(--hero-start), var(--hero-end));
+  color: #fff;
+  box-shadow: var(--glow-primary);
+}
+
+.btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 15px 25px rgba(0,0,0,0.1); }
+.btn.primary:hover { box-shadow: var(--glow-primary), 0 15px 30px hsla(var(--primary-hue), 80%, 60%, 0.5); }
+.btn:active { transform: translateY(0) scale(0.98); }
+
+.card { 
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); 
+  padding: 24px; box-shadow: var(--shadow); transform-style: preserve-3d; transition: border-color 0.3s;
+}
+
+@keyframes page-enter {
+  0% { opacity: 0; transform: translateY(20px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
